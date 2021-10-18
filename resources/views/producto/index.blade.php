@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-6">
-                                <label for="nombre">Producto: </label>
+                                <label for="">Producto: </label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
@@ -48,12 +48,12 @@
                         </div>
                          <div class="row">
                             <div class="form-group col-6">
-                                <label for="nombre">Proveedor: </label>
+                                <label for="">Proveedor: </label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
                                     </div>
-                                <input type="text" class="form-control" name="nombre">
+                                <input type="text" class="form-control" name="nombres">
                                 </div>
                             </div>
                         </div>
@@ -107,13 +107,13 @@
                                             <td></td>
                                             <td>
                                                 <div class="row justify-content-center">
-                                                    <a title="Editar" href="{{ url('/producto/'.$items->id.'/edit') }}" type="button" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <a title="Editar" href="{{ url('/producto/'.$items->id.'/edit') }}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
 
                                                     <div>
                                                         <form action="{{ url('/producto/'.$items->id) }}" method="POST" class="formEliminar">
                                                           @method('DELETE')
                                                           @csrf
-                                                          <button class="btn btn-outline-danger btn-sm" type="submit" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                                          <button class="btn btn-danger btn-sm" type="submit" title="Eliminar"><i class="fa fa-trash"></i></button>
                                                         </form>
                                                     </div>
                                                 </div>

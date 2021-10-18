@@ -20,7 +20,7 @@ class ProductosController extends Controller
     {
         
         $datatable = Productos::sqlReport($request);
-
+        //dd($datatable);
         return view('producto.index', compact('datatable'));
     }
 

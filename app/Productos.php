@@ -56,8 +56,8 @@ class Productos extends Model
             $datatable->where('p.precio', $search->precio);
         }
 
-         if ($search->proveedores_id != null) {
-            $datatable->where('pr.nombre', $search->proveedores_id);
+         if ($search->nombres!= null) {
+            $datatable->where('pr.nombre', $search->nombres);
         }
 
         return $datatable->orderBy('p.nombre')->distinct()->get();

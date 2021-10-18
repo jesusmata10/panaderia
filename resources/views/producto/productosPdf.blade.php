@@ -29,10 +29,10 @@
     <thead>
         <tr class="text-center" style="font-size:9pt">
             <th style="width: 8%">N°</th>
-            <th>NOMBRE</th>
+            <th>PRODUCTOS</th>
             <th>PRECIO</th>
             <th>IMAGÉN</th>
-            <th>PROVEEDOR</th>
+            <th>PROVEEDORES</th>
         </tr>
     </thead>
     <tbody>
