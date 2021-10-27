@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductoRequest;
 use App\Productos;
 use App\Proveedores;
 use Illuminate\Http\Request;
-use App\Http\Requests\ProductoRequest;
-use PDF;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class ProductosController extends Controller
 {
@@ -18,9 +18,8 @@ class ProductosController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $datatable = Productos::sqlReport($request);
-        //dd($datatable);
         return view('producto.index', compact('datatable'));
     }
 
@@ -33,7 +32,7 @@ class ProductosController extends Controller
     {
         $proveedor = Proveedores::Consulta();
 
-         return view('producto.create', compact('proveedor'));
+        return view('producto.create', compact('proveedor'));
     }
 
     /**
@@ -45,17 +44,24 @@ class ProductosController extends Controller
     public function store(ProductoRequest $request)
     {
 
-         try {
+        try {
 
-            $input = $request->all();
-            $producto=Productos::create($input);
-
-            if ($request->file('imagen') != null) {
-                $file = $request->file('imagen');
-                $fileName = 'imagen-'.time().'.'.$file->getClientOriginalExtension();
-                $path = $file->storeAs($producto->id, $fileName);
-
+            //$input = $request->all();
+            //$producto = Productos::create($input);
+             if ($request->file('imagen') != null) {
+                $file     = $request->file('imagen');
+                //$folderName = time() . '.' . $file;
+                $fileName = time() . '.' . $file->getClientOriginalExtension();
+                $path     = $file->storeAs($fileName, $fileName);
             }
+
+            $input = new Productos();
+            $input->nombre = $request->nombre;
+            $input->precio = $request->precio;
+            $input->proveedores_id = $request->proveedores_id;
+            $input['url'] = 'storage/'.$fileName.'/'.$fileName;
+            //dd($input);
+            $input->save();
 
             return redirect('/producto')->with('success', __('¡Producto Creado sastifactoriamente!'));
 
@@ -84,20 +90,18 @@ class ProductosController extends Controller
      */
     public function edit(Productos $productos, $producto)
     {
-        //$productos = Productos::Consulta();
-
         try {
+            $proveedor = Proveedores::all('id', 'nombre');
+            $seleccion = Productos::where('id', $producto)->first();
+            $contents  = Storage::get($producto);
 
-            $productos = Productos::where('id', $producto)->first();;
-            //dd($producto);
-            return view('producto.edit', ['productos' => $productos]);
-            
+            return view('producto.edit', ['proveedor' => $proveedor, 'seleccion' => $seleccion]);
+
         } catch (Exception $e) {
-            
+
             return redirect('/producto')->with('error', __('Ha ocurrido un Problema'));
 
         }
-
 
     }
 
@@ -138,7 +142,7 @@ class ProductosController extends Controller
     {
         $datatable = Productos::sqlReport($request);
         return PDF::loadView('producto.productosPdf', compact('datatable'))
-                  ->setPaper('letter')
-                  ->stream('producto.productosPdf');
+            ->setPaper('letter')
+            ->stream('producto.productosPdf');
     }
 }

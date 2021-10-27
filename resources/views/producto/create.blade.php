@@ -23,7 +23,7 @@
 	                <div class="card-body">
 	                    <div class="row">
 	                        <div class="form-group col-4">
-	                            <label for="nombre">Nombre: </label>
+	                            <label for="nombre">Producto: </label>
 	                            <div class="input-group">
 	                                <div class="input-group-prepend">
 	                                    <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
@@ -59,7 +59,7 @@
 	                        <div class="form-group col-6">
                                 <label for="file" class="col-md-6 col-form-label text-md-right">Seleccione un archivo para cargar</label>
                                 <div class="col-md-6">
-                                    <input id="file" name="imagen" type="file" class="form-control-file @error('file') is-invalid @enderror" name="file" value="{{ old('file') }}">
+                                    <input id="file" name="imagen" accept="image/*" type="file" class="form-control-file @error('file') is-invalid @enderror" name="file" value="{{ old('file') }}">
                                     @error('file')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

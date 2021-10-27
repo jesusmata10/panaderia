@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <form  action="{{ url('/producto').'/'.$productos }}" method="POST" role="form" id="form" enctype="multipart/form-data">
+            <form  action="{{ url('/producto').'/'.$seleccion->id }}" method="POST" role="form" id="form" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="card card-primary">
@@ -12,14 +12,16 @@
                         <h3 class="card-title text-bold">Editar Producto</h3>
                     </div>
                     <div class="card-body">
+                        <input type="hidden" name="producto" value="{{ $seleccion }}">
                         <div class="row">
+                            {{-- $productos->id --}}
                             <div class="form-group col-4">
-                                <label for="nombre">Nombre: </label>
+                                <label for="nombre">Producto: </label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
                                     </div>
-                                <input type="text" class="form-control" name="nombre" value="{{ $productos->nombre}}">
+                                <input type="text" class="form-control text-uppercase" name="nombre" value="{{ $seleccion->nombre}}">
                                 </div>
                             </div>
                             <div class="form-group col-4">
@@ -28,7 +30,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
                                     </div>
-                                <input type="text" class="form-control" name="precio" value="{{ $productos->precio}}">
+                                <input type="text" class="form-control" name="precio" value="{{ $seleccion->precio}}">
                                 </div>
                             </div>
                             <div class="form-group col-4">
@@ -37,12 +39,16 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
                                     </div>
-                                    <select class="form-control" id="" name="proveedores_id" data-toggle="tooltip" data-placement="bottom" title="Seleccione el Proveedor">
-                                        <option value="" selected>Seleccione una opción</option>
-                                        {{--@foreach ($productos as $items)
-                                        <option value="{{ $items->id }}">{{ $items->nombre }} </option>
+                                    <select class="form-control text-uppercase" id="" name="proveedores_id" data-toggle="tooltip" data-placement="bottom" title="Seleccione el Proveedor">
+                                        <option value="" disabled>Seleccione una opción</option>
+                                        @foreach ($proveedor as $items)
+                                            @if($items->id == $seleccion->id)
+                                                <option selected="selected" value="{{ $items->id }}">{{ $items->nombre}}</option>
+                                            @else
+                                                <option value="{{ $items->id }}"> {{ $items->nombre }} </option>
+                                            @endif 
                                         @endforeach
-                                    </select>--}}
+                                    </select>
                                 </div>
                             </div>
                         </div>

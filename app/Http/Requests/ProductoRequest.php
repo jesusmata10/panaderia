@@ -24,7 +24,7 @@ class ProductoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required|regex:/^[A-Za-záéíóúñÁÉÍÓÚÑ\s]+$/|between:2,50',
+            'nombre' => 'required|between:2,50',
             'precio' => 'required|numeric',
             'proveedores_id' => 'required',
             'imagen' => 'required|image|mimes:jpeg,png|max:1024',

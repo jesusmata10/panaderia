@@ -14,6 +14,7 @@ class Productos extends Model
         'nombre',
         'precio',
         'proveedores_id',
+        'url',
 
     ];
 
@@ -45,7 +46,7 @@ class Productos extends Model
 
     public static function sqlReport($search)
     {
-        $datatable = DB::table('productos as p')->select( DB::raw( 'row_number() OVER (ORDER BY p.nombre) as num'), 'p.id', 'p.nombre as producto_nombre', 'p.precio', 'p.proveedores_id', 'pr.nombre')
+        $datatable = DB::table('productos as p')->select( DB::raw( 'row_number() OVER (ORDER BY p.nombre) as num'), 'p.id', 'p.nombre as producto_nombre', 'p.precio', 'p.proveedores_id', 'p.url', 'pr.nombre')
         ->join('proveedores as pr', 'pr.id', 'p.proveedores_id');
 
         if ($search->nombre != null) {

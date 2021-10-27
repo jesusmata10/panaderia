@@ -4,136 +4,194 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-
             @if (session('success'))
-                <div class="alert alert-success desva">
-                    {{ session('success') }}
-                </div>
-            @elseif(session('error'))
-                <div class="alert alert-danger desva">
-                    {{ session('error') }}
-                </div>
-            @endif
-
-            <div id="criterioBusqueda" class="alert alert-danger desva" style="display: none" role="alert">
-                Debe seleccionar un criterio de b&uacute;squeda
+            <div class="alert alert-success desva">
+                {{ session('success') }}
             </div>
-
-            <form  action="{{ url('/producto') }}" method="GET" role="form" id="form">
+            @elseif(session('error'))
+            <div class="alert alert-danger desva">
+                {{ session('error') }}
+            </div>
+            @endif
+            <div class="alert alert-danger desva" id="criterioBusqueda" role="alert" style="display: none">
+                Debe seleccionar un criterio de búsqueda
+            </div>
+            <form action="{{ url('/producto') }}" id="form" method="GET" role="form">
                 {{ csrf_field() }}
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title text-bold">Criterios de B&uacute;squeda</h3>
+                        <h3 class="card-title text-bold">
+                            Criterios de Búsqueda
+                        </h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-6">
-                                <label for="">Producto: </label>
+                                <label for="">
+                                    Producto:
+                                </label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                                        <span class="input-group-text">
+                                            <i class="fas fa-hashtag">
+                                            </i>
+                                        </span>
                                     </div>
-                                <input type="text" class="form-control" name="nombre">
+                                    <input class="form-control" name="nombre" type="text">
+                                    </input>
                                 </div>
                             </div>
                             <div class="form-group col-6">
-                                <label for="precio">Precio: </label>
+                                <label for="precio">
+                                    Precio:
+                                </label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                                        <span class="input-group-text">
+                                            <i class="fas fa-hashtag">
+                                            </i>
+                                        </span>
                                     </div>
-                                <input type="text" class="form-control" name="precio">
+                                    <input class="form-control" name="precio" type="text">
+                                    </input>
                                 </div>
                             </div>
                         </div>
-                         <div class="row">
+                        <div class="row">
                             <div class="form-group col-6">
-                                <label for="">Proveedor: </label>
+                                <label for="">
+                                    Proveedor:
+                                </label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                                        <span class="input-group-text">
+                                            <i class="fas fa-hashtag">
+                                            </i>
+                                        </span>
                                     </div>
-                                <input type="text" class="form-control" name="nombres">
+                                    <input class="form-control" name="nombres" type="text">
+                                    </input>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                     <div class="card-footer">
                         <div class="float-right">
-                            <button type="button" name="send" onClick="validar()" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                            <a href="{{ url('/producto') }}" type="button" class="btn btn-primary"><i class="fa fa-eye"></i> Ver Todos</a>
-                            <button type="reset" class="btn btn-danger"><i class="fa fa-trash"></i> Limpiar</button>
+                            <button class="btn btn-primary" name="send" onclick="validar()" type="button">
+                                <i class="fa fa-search">
+                                </i>
+                                Buscar
+                            </button>
+                            <a class="btn btn-primary" href="{{ url('/producto') }}" type="button">
+                                <i class="fa fa-eye">
+                                </i>
+                                Ver Todos
+                            </a>
+                            <button class="btn btn-danger" type="reset">
+                                <i class="fa fa-trash">
+                                </i>
+                                Limpiar
+                            </button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-<br>
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-primary">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <a href="{{ url('producto/create') }}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo</a>
-                            
-                            <button type="button" onClick="reports('pdf')" class="btn btn-outline-primary"><i
-                                class="fa fa-file"></i> Pdf
-                            </button>
+    <br>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn btn-primary" href="{{ url('producto/create') }}" type="button">
+                                    <i class="fa fa-plus">
+                                    </i>
+                                    Nuevo
+                                </a>
+                                <button class="btn btn-secondary" onclick="reports('pdf')" type="button">
+                                    <i class="fa fa-file">
+                                    </i>
+                                    Pdf
+                                </button>
+                            </div>
                         </div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-12">
-                            <table id="example2" class="table table-bordered">
-                                <thead class="bg-primary">
-                                    <tr class="text-center">
-                                        <th style="width:60px">N°</th>
-                                        <th>Proveedor</th>
-                                        <th>Producto</th>
-                                        <th>precio</th>
-                                        <th style="width:100px">Imagen</th>
-                                        <th style="width:180px">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($datatable as $items)
-                                        <tr class="text-center">
-                                            <td>{{ $items->num }}</td>
-                                            <td>{{ $items->nombre }}</td>
-                                            <td>{{ $items->producto_nombre }}</td>
-                                            <td>{{ $items->precio }}</td>
-                                            <td></td>
-                                            <td>
-                                                <div class="row justify-content-center">
-                                                    <a title="Editar" href="{{ url('/producto/'.$items->id.'/edit') }}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-
-                                                    <div>
-                                                        <form action="{{ url('/producto/'.$items->id) }}" method="POST" class="formEliminar">
-                                                          @method('DELETE')
-                                                          @csrf
-                                                          <button class="btn btn-danger btn-sm" type="submit" title="Eliminar"><i class="fa fa-trash"></i></button>
+                        <br>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-responsive-lg table-striped" id="">
+                                        <thead class="bg-primary">
+                                            <tr class="text-center">
+                                                <th style="width:60px">
+                                                    N°
+                                                </th>
+                                                <th>
+                                                    Proveedor
+                                                </th>
+                                                <th>
+                                                    Producto
+                                                </th>
+                                                <th>
+                                                    precio
+                                                </th>
+                                                <th style="width:100px">
+                                                    Imagen
+                                                </th>
+                                                <th style="width:180px">
+                                                    Acciones
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($datatable as $items)
+                                            <tr class="text-center">
+                                                <td class="align-middle">
+                                                    {{ $items->num }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $items->nombre }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $items->producto_nombre }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $items->precio }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    <img alt="imagen" class="img-thumbnail justify-content-center" style="height:100px;" src="{{ asset( $items->url) }}"/>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <div class="row justify-content-center">
+                                                        <a class="btn btn-primary btn-group-sm" href="{{ url('/producto/'.$items->id.'/edit') }}" title="Editar" type="button">
+                                                            <i class="fas fa-edit">
+                                                            </i>
+                                                        </a>
+                                                        <form action="{{ url('/producto/'.$items->id) }}" class="formEliminar" method="POST">
+                                                            @method('DELETE')
+                                                                @csrf
+                                                            <button class="btn btn-danger btn-group-sm" title="Eliminar" type="submit">
+                                                                <i class="fa fa-trash">
+                                                                </i>
+                                                            </button>
                                                         </form>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
-                        </div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </br>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </br>
 </div>
-
 <script>
-
-setTimeout(function() {
+    setTimeout(function() {
     $(".desva").fadeOut(1500);
 },3000);
     
@@ -177,7 +235,7 @@ function validar() {
         desvanecer()
     } else {
         $("#form").submit()
-    }
+      }
 }
 
 function reports(type) {
