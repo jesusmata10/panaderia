@@ -138,7 +138,7 @@
                                                 <th style="width:100px">
                                                     Imagen
                                                 </th>
-                                                <th style="width:180px">
+                                                <th style="width:160px">
                                                     Acciones
                                                 </th>
                                             </tr>
@@ -159,22 +159,35 @@
                                                     {{ $items->precio }}
                                                 </td>
                                                 <td class="align-middle">
-                                                    <img alt="imagen" class="img-thumbnail justify-content-center" style="height:100px;" src="{{ asset( $items->url) }}"/>
+                                                    <img alt="imagen" class="img-thumbnail justify-content-center" src="{{ asset( $items->url) }}" style="height:100px;"/>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <div class="row justify-content-center">
-                                                        <a class="btn btn-primary btn-group-sm" href="{{ url('/producto/'.$items->id.'/edit') }}" title="Editar" type="button">
+                                                    {{--<div class="row">
+                                                        <a class="btn btn-primary btn-group-sm" href="{{ url('/producto/'.$items->id.'/edit') }}" title="Editar" type="button" data-placement="bottom">
                                                             <i class="fas fa-edit">
                                                             </i>
                                                         </a>
-                                                        <form action="{{ url('/producto/'.$items->id) }}" class="formEliminar" method="POST">
+                                                        <div class="">
+                                                            <form action="{{ url('/producto/'.$items->id) }}" class="formEliminar" method="POST">
                                                             @method('DELETE')
                                                                 @csrf
-                                                            <button class="btn btn-danger btn-group-sm" title="Eliminar" type="submit">
-                                                                <i class="fa fa-trash">
-                                                                </i>
-                                                            </button>
-                                                        </form>
+                                                                <button class="btn btn-danger btn-group-sm" title="Eliminar" type="submit" data-placement="bottom">
+                                                                    <i class="fa fa-trash">
+                                                                    </i>
+                                                                </button>
+                                                            </form>
+                                                        </div>  
+                                                    </div>--}}
+                                                    <div class="text-center">
+                                                        <div class="row">
+                                                            <div class="col-1" data-toggle="tooltip" data-placement="bottom" title="Ver Usuario">
+                                                                <button type="button" onClick="modal({{ $items->id }})" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></button>
+                                                            </div>
+                                                        
+                                                            <a href="{{ url('/usuario/'.encrypt($items->id).'/edit') }}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar Usuario"><i class="fas fa-edit"></i></a>
+                                                        
+                                                            <button type="button" class="btn btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -191,7 +204,7 @@
     </br>
 </div>
 <script>
-    setTimeout(function() {
+setTimeout(function() {
     $(".desva").fadeOut(1500);
 },3000);
     

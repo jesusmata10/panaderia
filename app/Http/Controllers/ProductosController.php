@@ -46,8 +46,6 @@ class ProductosController extends Controller
 
         try {
 
-            //$input = $request->all();
-            //$producto = Productos::create($input);
              if ($request->file('imagen') != null) {
                 $file     = $request->file('imagen');
                 //$folderName = time() . '.' . $file;
